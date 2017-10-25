@@ -1,3 +1,5 @@
+checking things 2
+
 # django-uwsgi-circus-nginx
 
 The newer versions of Django are going to support only Python3. A production
