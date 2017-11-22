@@ -8,17 +8,15 @@ RUN apt-get update && \
     usermod -a -G nginx user
 
 RUN mkdir -p -m 770 /src/run
+RUN mkdir -p /etc/nginx/sites-enabled/
 
 WORKDIR /src
-
 ADD . /src
+
 RUN pip3 install -r /src/requirements.txt
-
-RUN ln -s nginx.conf /etc/nginx/sites-enabled/
-
-
-
-# CMD ["python3", "/src/manage.py", "runserver", "0.0.0.0:8000"]
-# CMD ["/usr/local/bin/uwsgi --http :8000 --module app.wsgi"]
+RUN ln -s configs/nginx.conf /etc/nginx/sites-enabled/ \\
+                             /etc/nginx/sites-available/
 
 EXPOSE 8000
+
+CMD ["/usr/local/bin/uwsgi", "--ini", "app_uwsgi.ini"]
