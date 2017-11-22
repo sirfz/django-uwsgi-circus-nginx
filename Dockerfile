@@ -16,6 +16,7 @@ ADD . /src
 RUN pip3 install -r /src/requirements.txt
 RUN ln -s configs/nginx.conf /etc/nginx/sites-enabled/ \\
                              /etc/nginx/sites-available/
+RUN echo yes | python manage.py collectstatic
 
 EXPOSE 8000
 
